@@ -9,8 +9,8 @@ Nous allons ici faire fonctionner l'algorithme _map-reduce_ qui compte les mots 
 *Remarque* : Pour ce TP et le suivant, vous devez savoir ouvrir un _Terminal_ sur votre machine, quelque soit le système d'exploitation. Sous _Windows 10_ (et successeurs), vous pourrez utiliser le programme _Powershell_ (installé par défaut ) qui est très similaires au _Terminal_ de _Linux_ et de _Mac OS X_.   
 Vous devez aussi savoir a minima naviguer dans vos dossiers à l'aide de la commande `cd`. Typiquement :
 ```bash
-cd c:\Users\stephane\TP_Hadoop # Windows
-cd ~\stephane\TP_Hadoop        # Mac, linux
+cd c:\Users\elossmani\TP_Hadoop # Windows
+cd ~\elossmani\TP_Hadoop        # Mac, linux
 ```
 Si vous souhaitez remonter d'un niveau dans la hiérarchie des dossiers: `cd ..`. Des tutos vidéo existent pour découvrir les commandes de bases (identiques à celles que l'on retrouve sur les systèmes _Linux_), dont [celui-ci](https://docs.microsoft.com/fr-fr/powershell/scripting/overview?view=powershell-7.1). Noter enfin que _Powershell_ inclus _git_, _wget_ et _ssh_ : trois outils que nous utiliserons durant les TPs.
 
