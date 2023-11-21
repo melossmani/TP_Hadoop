@@ -12,9 +12,6 @@ Suivez  les consignes permettant d'exécuter l'algorithme _map-reduce_ de compta
 ---
 ## Partie 2 - _map-reduce_ avec Hadoop
 
-Pour installer **Hadoop** sur votre machine (à l'aide de *Docker*), suivez les consignes du fichier : 
-> [Install_Docker_Hadoop.md](./Install_Docker_Hadoop.md)
-
 Suivez ensuite les consignes permettant de lancer le comptage de mots en tant que _job map-reduce_ : 
 > [Wordcount_Hadoop.md](./Wordcount_Hadoop.md)
 
