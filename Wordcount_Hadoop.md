@@ -198,7 +198,7 @@ Found 3 items
 
 **Hadoop** offre plusieurs interfaces web pour pouvoir observer le comportement de ses différentes composantes. Vous pouvez afficher ces pages en local sur votre machine grâce à l'option _-p_ de la commande `docker run`. 
  
-- Le **port 9870** permet d'afficher les informations de votre _Namenode_.      
+- Le **port 50070** permet d'afficher les informations de votre _Namenode_.      
 - Le **port 8088** permet d'afficher les informations du _resource manager_ (appelé _Yarn_) et visualiser le comportement des différents jobs.
 
 Une fois votre cluster lancé et prêt à l'emploi, utilisez votre navigateur préféré pour observer la page [http://localhost:50070](http://localhost:50070). _Attention_ : lors de l'installation, certains étudiants auront du supprimer le _mapping_ de ce port, ils ne leur sera donc pas possible de visualiser la page, semblable à :
