@@ -1,6 +1,6 @@
 **Sommaire**
 
-[TOC]
+[[_TOC_]]
 
 # Wordcount, en local
 
