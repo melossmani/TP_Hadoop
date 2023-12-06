@@ -94,7 +94,7 @@ fourni pour cela, appelé start-hadoop.sh. Lancer ce script.
 ```
 Le résultat devra ressembler à ce qui suit :
 
-<img src="hadoop-img1.png"/>
+<img src="figures/hadoop-img1.png"/>
 
 
 ## Premiers pas avec Hadoop
@@ -130,7 +130,7 @@ hadoop fs -tail input/purchases.txt
 ```
 Le résultat suivant va donc s’afficher :
 
-<img src="hdfs-commandes.png"/>
+<img src="figures/hdfs-commandes.png"/>
 
 ### Interfaces web pour Hadoop
 Hadoop offre plusieurs interfaces web pour pouvoir observer le comportement de ses différentes
@@ -151,12 +151,12 @@ comportement des différents jobs.
 Une fois votre cluster lancé et prêt à l'emploi, vous pouvez, sur votre navigateur préféré de votre machine
 hôte, aller à : [http://localhost:50070](http://localhost:50070) . Vous obtiendrez le résultat suivant :
 
-<img src="hadoop-img4.png"/>
+<img src="figures/hadoop-img4.png"/>
 
 Vous pouvez également visualiser l'avancement et les résultats de vos Jobs (Map Reduce ou autre) en
 allant à l’adresse : [http://localhost:8088](http://localhost:8088)
 
-<img src="hadoop-img3.png"/>
+<img src="figures/hadoop-img3.png"/>
 
 **Remarque** Ces étapes de configuration ne doivent être réalisées qu'une seule fois. Pour relancer le cluster (une fois qu'on a fermer et relancer son ordinateur p. ex.), il suffira 
 
