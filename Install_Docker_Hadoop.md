@@ -2,92 +2,172 @@
 
 [TOC]
 
-# Installation de **Hadoop** via _Docker_
-
-Les étapes pour installer **Hadoop** via _Docker_ sont largement adaptées de la page de [Lilia Sfaxi](https://insatunisia.github.io/TP-BigData/), elles-mêmes reposant sur le projet [github de Kai LIU](https://github.com/kiwenlau/Hadoop-cluster-docker).
-
----
-## Installation de *Docker* et des nœuds
+# Installation de *Docker*
 
 Pour installer *Docker*, merci de suivre les [consignes disponibles ici](https://docs.docker.com/desktop/), en fonction de votre système d'exploitation (lisez les _System requirements_ pour vérifier que votre machine est adaptée). Si votre machine est trop ancienne, ou avec peu d'espace disque ou mémoire RAM, il y a de bonnes chances que l'installation ne fonctionne pas. Si c'est le cas, 
 
-- soit vous pouvez travailler avec votre voisin,    
-- soit vous pouvez aller directement à la seconde partie du TP, et réaliser les exercices en local (sans **Hadoop**).
-
-Nous allons utiliser tout au long de ce TP trois contenaires représentant respectivement un nœud maître (le _Namenode_) et deux nœuds esclaves (les _Datanodes_).
-
-1. Depuis un _Terminal_, téléchargez l'image docker depuis [_dockerhub_](https://hub.docker.com) (volume à télécharger > 3.3 GB !). Si votre ordinateur est équipé de seulement 8GB de RAM, alors utilisez la commande suivante :
-```bash
-docker pull stephanederrode/docker-cluster-hadoop-spark-python-8:3.2
-```
-Sinon utilisez :
-```bash
-docker pull stephanederrode/docker-cluster-hadoop-spark-python-16:3.2
-```
-
-Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécessaires pour utiliser **Hadoop** et **Spark**. Il contient également _Python3.x_ (version du langage _Python_ compatible avec les versions de **Hadoop** et **Spark** installées).
-
-2. Créez les 3 contenaires à partir de l'image téléchargée. Pour cela:
-
-a. Créez un réseau qui permettra de relier les trois contenaires:
-```bash
-docker network create --driver=bridge hadoop
-```     
-
-b. Créez et lancez les trois contenaires (les instructions `-p` permettent de faire un _mapping_ entre les ports de la machine hôte et ceux du contenaire). **Important** Dans la suite, adaptez la syntaxe `-16` à la syntaxe `-8`, en fonction de l'image que vous avez téléchargée.
-```bash
-docker run -itd --net=hadoop -p 9870:9870 -p 8088:8088 -p 7077:7077 \
-  -p 16010:16010 -p 9999:9999 --name hadoop-master --hostname hadoop-master \
-  stephanederrode/docker-cluster-hadoop-spark-python-16:3.2
-
-docker run -itd -p 8040:8042 --net=hadoop --name hadoop-slave1 --hostname hadoop-slave1 \
-  stephanederrode/docker-cluster-hadoop-spark-python-16:3.2
-
-docker run -itd -p 8041:8042 --net=hadoop --name hadoop-slave2 --hostname hadoop-slave2 \
-  stephanederrode/docker-cluster-hadoop-spark-python-16:3.2
-```     
-
-
-**Remarques** 
-
-- Dans la commande précédente le caractère `\`, utilisé pour poursuivre une commande sur plusieurs lignes, peut parfois poser des pbs. Pour résoudre ce problème, vous pouvez copier cette ligne dans un éditeur de texte, et supprimer ce caractère ainsi que les sauts de ligne.
-
-- Sur certaines machines, la première ligne de commande ne s'exécute pas correctement. L'erreur provient sans doute du port `9870` que doit déjà être utilisé par une autre application installée sur votre machine. Vous pouvez alors supprimer ce port de la première ligne de commande :
-```bash
-docker run -itd --net=hadoop -p 8088:8088 -p 7077:7077 -p 16010:16010 -p 9999:9999 \
-  --name hadoop-master --hostname hadoop-master \
-  stephanederrode/docker-cluster-hadoop-spark-python-16:3.2
-```
- 
-- Le port `9999` sera utilisé dans la partie 3 de ce TP, au sujet de _Spark streaming_.
+# Installation de **Hadoop** via _Docker_
 
 ---
-### Préparation au TP
+Nous allons utiliser tout au long de ce TP trois contenaires représentant respectivement un nœud maître (_Namenode_) et deux nœuds esclaves (_Datanodes_).
+1. Depuis un _Terminal_, téléchargez l'image docker depuis [_dockerhub_](https://hub.docker.com) en utilisant la commande suivante :
 
-- Entrez dans le contenaire `hadoop-master` pour commencer à l'utiliser
+```bash
+docker pull melossmani/hadoop-spark:um6p
+
+```
+
+Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécessaires pour utiliser **Hadoop** et **Spark**. Ce container ne contient pas Python, mais nous verrons comment l'installer a posteriori.
+2. Créez les 3 contenaires à partir de l'image téléchargée. Pour cela :
+  
+   a. Créez un réseau qui permettra de relier les trois contenaires :
+```bash
+   docker network create --driver=bridge hadoop
+```     
+   b. Créez et lancez les trois contenaires (les instructions `-p` permettent de faire un _mapping_ entre les ports de la machine hôte et ceux du contenaire). 
+   ```bash
+     docker run -itd --net=hadoop -p 50070:50070 -p 8088:8088 -p 7077:7077 -p 16010:16010 --name hadoop-master --hostname hadoop-master melossmani/hadoop-spark:um6p
+   ```
+
+   ```bash
+     docker run -itd -p 8040:8042 --net=hadoop --name hadoop-slave1 --hostname hadoop-slave1 melossmani/hadoop-spark:um6p
+   ```
+
+   ```bash
+     docker run -itd -p 8041:8042 --net=hadoop --name hadoop-slave2 --hostname hadoop-slave2  melossmani/hadoop-spark:um6p   `
+   ```
+
+## Préparation au TP
+
+1. Entrez dans le contenaire `hadoop-master` pour commencer à l'utiliser
+
 ```bash
 docker exec -it hadoop-master bash
 ```
+
 Le résultat de cette exécution sera le suivant:
+
 ```bash
 root@hadoop-master:~#
 ```
-Il s'agit du `shell` ou du `bash` (_Linux/Ubuntu_) du nœud maître. 
-  
-- La commande `ls`, qui liste les fichiers et dossiers du dossier en cours, doit faire état des fichiers suivants :
-```bash
-hdfs start-hadoop.sh ventes
-```
-Le dossier _ventes_ contient un fichier _purchases.txt_ qui sera utilisé lors de la seconde partie du TP.
+Il s'agit du `shell` ou du `bash` (_Linux/Ubuntu_) du nœud maître. Vous vous retrouverez dans le shell du namenode, et vous pourrez ainsi manipuler le cluster à votre
+guise.  Nous allons en profiter pour installer _Python2.7_ (version requise pour la version d'**Hadoop** installée):
 
-**Remarque** Ces étapes de configuration ne doivent être réalisées qu'une seule fois. Pour relancer le cluster (une fois qu'on a fermé et relancé son ordinateur p. ex.), il suffira 
+ ```shell
+ apt-get update
+ apt-get install python2.7
+ ```
 
-1. de lancer l'application `Docker Desktop`, qui lance les _daemon Docker_.   
-1. de lancer la commande suivante :
+2. Cette installation de _Python_ doit aussi être réalisée sur les _Datanodes_. Quittez le contenaire `hadoop-master`
+ ```shell
+ exit
+ ```
+ Puis, enchaînez les commandes suivantes (une par une) pour le container `hadoop-slave1` :
+ ```shell
+ docker exec -it hadoop-slave1 bash
+ ```
+ Puis
+ ```shell
+ apt-get update
+ apt-get install python2.7
+ exit
+ ```
+ et pour le container `hadoop-slave2`
+ ```shell
+ docker exec -it hadoop-slave2 bash
+ ```
+ Puis
+ ```shell
+ apt-get update
+ apt-get install python2.7
+ exit
+ ```
+3. Enfin, entrez à nouveau dans le container `hadoop-master` dans lequel nous allons lancer les _jobs_ :
+ ```shell
+ docker exec -it hadoop-master bash
+ ```  
+La première chose à faire, une fois dans le contenaire, est de lancer hadoop et yarn. Un script est
+fourni pour cela, appelé start-hadoop.sh. Lancer ce script.
+
 ```bash
-docker start hadoop-master hadoop-slave1 hadoop-slave2
+./start-hadoop.sh
 ```
+Le résultat devra ressembler à ce qui suit :
+
+<img src="hadoop-img1.png"/>
+
+
+## Premiers pas avec Hadoop
+Toutes les commandes interagissant avec le système **Hadoop** commencent par `hadoop fs`.
+Ensuite, les options rajoutées sont très largement inspirées des commandes Unix standard.
+
+- Créer un répertoire dans HDFS, appelé input. Pour cela, taper :
+```bash
+ hadoop fs –mkdir -p input
+```
+Si pour une raison ou une autre, vous n'arrivez pas à créer le répertoire input, avec un message
+ressemblant à ceci: ls: `.': No such file or directory, veiller à construire l'arborescence de l'utilisateur
+principal (root), comme suit :
+
+```bash
+hadoop fs -mkdir -p /user/root
+```
+Nous allons utiliser le fichier purchases.txt comme entrée pour le traitement MapReduce. Ce fichier se
+trouve déjà sous le répertoire principal de votre machine master.
+
+- Charger le fichier purchases dans le répertoire input que vous avez créé :
+```bash
+hadoop fs –put purchases.txt input
+```
+
+- Pour afficher le contenu du répertoire input, la commande est :
+```bash
+hadoop fs –ls input
+```
+Pour afficher les dernières lignes du fichier purchases :
+```bash
+hadoop fs -tail input/purchases.txt
+```
+Le résultat suivant va donc s’afficher :
+
+<img src="hdfs-commandes.png"/>
+
+### Interfaces web pour Hadoop
+Hadoop offre plusieurs interfaces web pour pouvoir observer le comportement de ses différentes
+composantes. Vous pouvez afficher ces pages en local sur votre machine grâce à l'option -p de la
+commande docker run. En effet, cette option permet de publier un port du contenaire sur la machine
+hôte. Pour pouvoir publier tous les ports exposés, vous pouvez lancer votre contenaire en utilisant
+l'option -P.
+
+En regardant le contenu du fichier start-container.sh fourni dans le projet, vous verrez que deux ports de
+la machine maître ont été exposés :
+
+Le port 50070 : qui permet d'afficher les informations de votre namenode.
+
+Le port 8088 : qui permet d'afficher les informations du resource manager de Yarn et visualiser le
+comportement des différents jobs.
+
+
+Une fois votre cluster lancé et prêt à l'emploi, vous pouvez, sur votre navigateur préféré de votre machine
+hôte, aller à : [http://localhost:50070](http://localhost:50070) . Vous obtiendrez le résultat suivant :
+
+<img src="hadoop-img4.png"/>
+
+Vous pouvez également visualiser l'avancement et les résultats de vos Jobs (Map Reduce ou autre) en
+allant à l’adresse : [http://localhost:8088](http://localhost:8088)
+
+<img src="hadoop-img3.png"/>
+
+**Remarque** Ces étapes de configuration ne doivent être réalisées qu'une seule fois. Pour relancer le cluster (une fois qu'on a fermer et relancer son ordinateur p. ex.), il suffira 
+
+  1. de lancer l'application ```Docker Desktop```, qui lance les _daemon Docker_.   
+  1. de lancer la commande suivante :
+   ```shell
+   docker start hadoop-master hadoop-slave1 hadoop-slave2
+   ```
+
 Vous pouvez alors entrer dans le _Namenode_ :
-```bash
+```shell
 docker exec -it hadoop-master bash
 ```
+
