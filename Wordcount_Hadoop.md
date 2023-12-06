@@ -201,9 +201,9 @@ Found 3 items
 - Le **port 9870** permet d'afficher les informations de votre _Namenode_.      
 - Le **port 8088** permet d'afficher les informations du _resource manager_ (appelé _Yarn_) et visualiser le comportement des différents jobs.
 
-Une fois votre cluster lancé et prêt à l'emploi, utilisez votre navigateur préféré pour observer la page [http://localhost:9870](http://localhost:9870). _Attention_ : lors de l'installation, certains étudiants auront du supprimer le _mapping_ de ce port, ils ne leur sera donc pas possible de visualiser la page, semblable à :
+Une fois votre cluster lancé et prêt à l'emploi, utilisez votre navigateur préféré pour observer la page [http://localhost:50070](http://localhost:50070). _Attention_ : lors de l'installation, certains étudiants auront du supprimer le _mapping_ de ce port, ils ne leur sera donc pas possible de visualiser la page, semblable à :
 
-![interface 9870](figures/interface9870.png)
+![interface 50070](figures/interface9870.png)
 
 Prenez le temps de naviguer dans les menus et d'observer les informations indiquées.
 
