@@ -5,13 +5,15 @@
 # Installation de *Docker*
 
 Pour installer *Docker*, merci de suivre les [consignes disponibles ici](https://docs.docker.com/desktop/), en fonction de votre système d'exploitation (lisez les _System requirements_ pour vérifier que votre machine est adaptée). Si votre machine est trop ancienne, ou avec peu d'espace disque ou mémoire RAM, il y a de bonnes chances que l'installation ne fonctionne pas. 
-pour les utilisateur de windows au cas où ne marche pas il faut executer ces instrucions sur un terminal windows :
+Pour les utilisateurs de windows au cas où Le docker ne démare pas il faut executer ces instrucions sur un terminal windows :
 
 ```bash
 wsl.exe --update
-
+```
+```bash
 wsl --unregister docker-desktop
-
+```
+```bash
 wsl --unregister docker-desktop-data
 ```
 # Installation de **Hadoop** via _Docker_
