@@ -35,7 +35,7 @@ Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécess
   ```bash
      docker network create --driver=bridge hadoop
   ```
-hhhhhh
+
     b. Créez et lancez les trois contenaires (les instructions `-p` permettent de faire un _mapping_ entre les ports de la machine hôte et ceux du contenaire).       
  
    ```bash
