@@ -35,10 +35,8 @@ Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécess
   ```bash
      docker network create --driver=bridge hadoop
    ```
-</br>   
-     a. Créez et lancez les trois contenaires (les instructions _-p_ permettent de faire un _mapping_ entre les ports de la machine hôte et ceux du contenaire). 
- </br>   
- 
+   b. Créez et lancez les trois contenaires (les instructions _-p_ permettent de faire un _mapping_ entre les ports de la machine hôte et ceux du contenaire). 
+   
    ```bash
       docker run -itd --net=hadoop -p 50070:50070 -p 8088:8088 -p 7077:7077 -p 16010:16010 --name hadoop-master --hostname hadoop-master melossmani/hadoop-spark:um6p
    ```
