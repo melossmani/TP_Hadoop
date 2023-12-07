@@ -12,11 +12,11 @@ wsl.exe --update
 ```
 
 ```bash
-wsl --unregister docker-desktop
+wsl.exe --unregister docker-desktop
 ```
 
 ```bash
-wsl --unregister docker-desktop-data
+wsl.exe --unregister docker-desktop-data
 ```
 # Installation de **Hadoop** via _Docker_
 ---
@@ -28,7 +28,7 @@ docker pull melossmani/hadoop-spark:um6p
 
 ```
 
-Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécessaires pour utiliser **Hadoop** et **Spark**. Ce container contient Python 3.0.
+Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécessaires pour utiliser **Hadoop** et **Spark**. Ce container contient Python 3.0 version requise pour la version de **Hadoop** et *Spark**  installées.
 
 2. Créez les 3 contenaires à partir de l'image téléchargée. Pour cela :
   
