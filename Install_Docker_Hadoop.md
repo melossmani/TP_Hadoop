@@ -27,15 +27,14 @@ Nous allons utiliser tout au long de ce TP trois contenaires représentant respe
 docker pull melossmani/hadoop-spark:um6p
 
 ```
-
 Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécessaires pour utiliser **Hadoop** et **Spark**. Ce container contient aussi _python_ 3.0 version requise pour les versions de **Hadoop** et **Spark**  installées.
 
 2. Créez les 3 contenaires à partir de l'image téléchargée. Pour cela :
   a. Créez un réseau qui permettra de relier les trois contenaires :
 ```bash
    docker network create --driver=bridge hadoop
-```     
-   b. Créez et lancez les trois contenaires (les instructions `-p` permettent de faire un _mapping_ entre les ports de la machine hôte et ceux du contenaire). 
+```
+  b. Créez et lancez les trois contenaires (les instructions `-p` permettent de faire un _mapping_ entre les ports de la machine hôte et ceux du contenaire). 
    ```bash
      docker run -itd --net=hadoop -p 50070:50070 -p 8088:8088 -p 7077:7077 -p 16010:16010 --name hadoop-master --hostname hadoop-master melossmani/hadoop-spark:um6p
    ```
