@@ -44,7 +44,7 @@ wget http://www.textfiles.com/etext/FICTION/dracula
 cat dracula | python mapper.py
 ```
   **Remarques Windows**     
-      - Si vous utilisez _Windows_, remplacer `python` par `python.exe` et cat par type. Pensez à faire ce changement partout dans l'énoncé. Si la commande `python.exe` ne fonctionne pas, alors essayez de régler le problème avec la remarque suivante.       
+      - Si vous utilisez _Windows_, remplacer `python` par `python.exe` et `cat` par `type`. Pensez à faire ce changement partout dans l'énoncé. Si la commande `python.exe` ne fonctionne pas, alors essayez de régler le problème avec la remarque suivante.       
       - Pour les étudiants utilisant _Windows_, vous pourriez rencontrer des difficultés avec la ligne précédente, qui fait appel à _Python_ en ligne de commandes. La raison : l'endroit où est stocké le programme _python.exe_ n'est pas connu de votre machine, il faut donc le préciser en modifiant la variable d'environnement _PATH_. Pour cela, vous pouvez suivre les indications données dans la Section _Method 2: Manually add Python to Windows Path_ de [ce lien](https://datatofish.com/add-python-to-windows-path/).
 
   - Lancez ensuite la commande entière et observez le résultat:
