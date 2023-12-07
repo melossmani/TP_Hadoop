@@ -4,10 +4,17 @@
 
 # Installation de *Docker*
 
-Pour installer *Docker*, merci de suivre les [consignes disponibles ici](https://docs.docker.com/desktop/), en fonction de votre système d'exploitation (lisez les _System requirements_ pour vérifier que votre machine est adaptée). Si votre machine est trop ancienne, ou avec peu d'espace disque ou mémoire RAM, il y a de bonnes chances que l'installation ne fonctionne pas. Si c'est le cas, 
+Pour installer *Docker*, merci de suivre les [consignes disponibles ici](https://docs.docker.com/desktop/), en fonction de votre système d'exploitation (lisez les _System requirements_ pour vérifier que votre machine est adaptée). Si votre machine est trop ancienne, ou avec peu d'espace disque ou mémoire RAM, il y a de bonnes chances que l'installation ne fonctionne pas. 
+pour les utilisateur de windows au cas où ne marche pas il faut executer ces instrucions sur un terminal windows :
 
+```bash
+wsl.exe --update
+
+wsl --unregister docker-desktop
+
+wsl --unregister docker-desktop-data
+```
 # Installation de **Hadoop** via _Docker_
-
 ---
 Nous allons utiliser tout au long de ce TP trois contenaires représentant respectivement un nœud maître (_Namenode_) et deux nœuds esclaves (_Datanodes_).
 1. Depuis un _Terminal_, téléchargez l'image docker depuis [_dockerhub_](https://hub.docker.com) en utilisant la commande suivante :
@@ -18,6 +25,7 @@ docker pull melossmani/hadoop-spark:um6p
 ```
 
 Ce container contient une distribution _Linux/Ubuntu_, et les librairies nécessaires pour utiliser **Hadoop** et **Spark**. Ce container contient Python 3.0.
+
 2. Créez les 3 contenaires à partir de l'image téléchargée. Pour cela :
   
    a. Créez un réseau qui permettra de relier les trois contenaires :
