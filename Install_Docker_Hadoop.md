@@ -10,9 +10,11 @@ Pour les utilisateurs de windows au cas où Le docker ne démare pas il faut exe
 ```bash
 wsl.exe --update
 ```
+
 ```bash
 wsl --unregister docker-desktop
 ```
+
 ```bash
 wsl --unregister docker-desktop-data
 ```
