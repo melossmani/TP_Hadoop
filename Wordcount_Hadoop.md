@@ -128,9 +128,9 @@ Souvenez-vous de cette manip., car il faudra aussi la mettre en place sur vos no
 
 - Tout d'abord, stockez le lien vers la librairie permettant de programmer avec _Python_ dans une variable système :
 ```bash
-export STREAMINGJAR='/usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.2.2.jar'
+export STREAMINGJAR='/usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.7.2.jar'
 ```    
-Je vous rappelle que _**Hadoop** map-reduce_ fonctionne avec le langage **Java** ; il faut donc utiliser une bibliothèque capable de transformer des instructions _Python_ en instruction **Java**. C'est le rôle de cette bibliothèque _hadoop-streaming-3.2.2.jar_ (on appelle cela un _wrapper_).    
+Je vous rappelle que _**Hadoop** map-reduce_ fonctionne avec le langage **Java** ; il faut donc utiliser une bibliothèque capable de transformer des instructions _Python_ en instruction **Java**. C'est le rôle de cette bibliothèque _hadoop-streaming-2.7.2.jar_ (on appelle cela un _wrapper_).    
   
 - Ensuite, lancez le _job_ **Hadoop** avec l'instruction suivante (copiez tout le bloc d'instructions et collez-le dans le _Terminal_):
 ```bash
